@@ -526,42 +526,15 @@ h1, h2, h3, h4 {
 
 .bento-card.plain.bold p { opacity: 0.9; }
 
-/* ---------- Info blokkok ---------- */
-.info-blocks {
-  display: flex;
-  justify-content: center;
-}
-
-.info-blocks .info-card {
-  width: 100%;
-  max-width: 420px;
-}
-
-.info-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  padding: 36px;
-}
-
-.info-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-line);
-}
-
-.partner-logos { display: flex; align-items: center; gap: 24px; margin-bottom: 20px; }
-.partner-logos img { height: 60px; width: auto; }
-
+/* ---------- Lábléc: social ---------- */
 .social-icons { display: flex; gap: 12px; }
 
 .social-icons a {
   width: 44px; height: 44px;
   border-radius: 50%;
-  background: var(--color-bg);
-  border: 1px solid var(--color-line);
-  color: var(--color-heading);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.85);
   display: flex; align-items: center; justify-content: center;
   transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
@@ -594,6 +567,17 @@ h1, h2, h3, h4 {
   background: var(--color-ink);
   color: var(--color-white);
 }
+
+/* ---------- Partner logók ---------- */
+.partners-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.partners-strip img { height: 40px; width: auto; opacity: 0.85; }
 
 /* ---------- Fizetés jegyzet ---------- */
 .payment-note {
@@ -774,6 +758,30 @@ h1, h2, h3, h4 {
 .menu-item-desc { font-size: 0.88rem; color: var(--color-text-soft); margin-top: 3px; }
 .menu-item-price { font-weight: 700; white-space: nowrap; color: var(--color-accent); font-variant-numeric: tabular-nums; }
 
+.menu-subhead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  margin: 24px 0 4px;
+}
+.menu-subhead:first-of-type { margin-top: 0; }
+
+.menu-note {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+.menu-legal {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.8rem;
+  color: var(--color-text-faint);
+  text-align: center;
+}
+
 /* ---------- Támogatás ---------- */
 .support-banner { max-width: 620px; margin-bottom: 36px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-line); }
 
@@ -826,9 +834,6 @@ h1, h2, h3, h4 {
 }
 
 .footer-grid .logo-text { color: var(--color-white); }
-.footer-nav { display: flex; gap: 24px; flex-wrap: wrap; }
-.footer-nav a { font-size: 0.9rem; opacity: 0.75; transition: opacity var(--dur-base) var(--ease-out); }
-.footer-nav a:hover { opacity: 1; }
 
 .site-footer .footer-bottom {
   display: flex;
