@@ -753,6 +753,102 @@ h1, h2, h3, h4 {
   .reviews-head { margin-bottom: 28px; }
 }
 
+/* ---------- GYIK ---------- */
+/* Natív <details>/<summary>: nulla JS, és a billentyűzet- meg
+   képernyőolvasó-kezelés eleve helyes. Kártyák helyett hajszálvonalas
+   lista - az értékelés-szekció már hozott három kártyát, egy második
+   kártyahalmaz nyugtalanná tenné az oldalt. */
+.faq-container { max-width: 780px; }
+
+.faq-head { margin-bottom: 44px; }
+
+.faq-item {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq-item:first-child { border-top: 1px solid var(--color-line); }
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 4px;
+  font-weight: 600;
+  font-size: 1.06rem;
+  color: var(--color-heading);
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+/* A böngésző alapértelmezett háromszögének elrejtése */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { content: ""; }
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-item summary:hover { color: var(--color-accent); }
+}
+
+.faq-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.faq-icon svg { width: 16px; height: 16px; }
+
+.faq-item[open] .faq-icon { transform: rotate(180deg); }
+
+.faq-answer {
+  padding: 0 4px 26px;
+  max-width: 62ch;
+}
+
+.faq-answer p {
+  color: var(--color-text-soft);
+  line-height: 1.75;
+}
+
+.faq-footnote {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.97rem;
+}
+
+.faq-footnote a {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-base) var(--ease-out);
+  /* A telefonszám ne törjön ketté a sor végén */
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-footnote a:hover { border-bottom-color: currentColor; }
+}
+
+@media (max-width: 760px) {
+  .faq-head { margin-bottom: 30px; }
+  .faq-item summary { padding: 20px 2px; font-size: 1rem; gap: 14px; }
+  .faq-answer { padding: 0 2px 22px; }
+}
+
 /* ---------- Nagy idézet ---------- */
 /* Egyetlen, tudatosan teli-színű pillanat az oldalon - a "Committed" színstratégia
    egy alkalmazása a különben visszafogott rendszerben, hogy legyen valódi

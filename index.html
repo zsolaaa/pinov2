@@ -236,6 +236,82 @@
     </div>
   </section>
 
+  <section class="section faq-section" data-reveal-group aria-labelledby="faq-title">
+    <div class="container faq-container">
+      <div class="section-head faq-head" data-reveal>
+        <span class="eyebrow">Gyakori kérdések</span>
+        <h2 id="faq-title">Amit gyakran kérdeznek tőlünk.</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" data-reveal>
+          <summary>
+            Lehet SZÉP-kártyával fizetni?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Igen, OTP, MBH és K&amp;H SZÉP-kártyát is elfogadunk.</p></div>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>
+            Lehet bankkártyával fizetni?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Igen, bankkártyát és készpénzt is elfogadunk.</p></div>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>
+            Kell asztalt foglalni?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Hétvégén és ünnepnapokon érdemes előre foglalni, hogy biztosan legyen szabad asztal.</p></div>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>
+            Van lehetőség elvitelre?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Igen, telefonon leadott rendeléseket személyesen is át lehet venni.</p></div>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>
+            Van terasz?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Igen, jó időben hangulatos teraszunk is várja vendégeinket.</p></div>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>
+            Hol tudok parkolni?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer"><p>Éttermünk Baja belvárosában található, a környéken több parkolóhely is elérhető.</p></div>
+        </details>
+      </div>
+
+      <p class="faq-footnote" data-reveal>
+        Nem találja, amit keres? Hívjon minket bizalommal:
+        <a href="tel:+36307556846">+36 30 755 6846</a>
+      </p>
+    </div>
+  </section>
+
   <section class="section-tight" data-reveal-group>
     <div class="container">
       <div class="closing-cta" data-reveal>
@@ -272,6 +348,49 @@
       </div>
     </div>
   </footer>
+
+  <!-- A GYIK strukturált adata. Ellentétben a saját magunkról szóló
+       értékelésekkel (amit a Google tilt), a FAQPage jelölés a saját
+       kérdéseinkre legitim, és segít az AI-keresőknek pontosan
+       idézni a válaszokat. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Lehet SZÉP-kártyával fizetni?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Igen, OTP, MBH és K&H SZÉP-kártyát is elfogadunk." }
+      },
+      {
+        "@type": "Question",
+        "name": "Lehet bankkártyával fizetni?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Igen, bankkártyát és készpénzt is elfogadunk." }
+      },
+      {
+        "@type": "Question",
+        "name": "Kell asztalt foglalni?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Hétvégén és ünnepnapokon érdemes előre foglalni, hogy biztosan legyen szabad asztal." }
+      },
+      {
+        "@type": "Question",
+        "name": "Van lehetőség elvitelre?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Igen, telefonon leadott rendeléseket személyesen is át lehet venni." }
+      },
+      {
+        "@type": "Question",
+        "name": "Van terasz?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Igen, jó időben hangulatos teraszunk is várja vendégeinket." }
+      },
+      {
+        "@type": "Question",
+        "name": "Hol tudok parkolni?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Éttermünk Baja belvárosában található, a környéken több parkolóhely is elérhető." }
+      }
+    ]
+  }
+  </script>
 
   <script src="js/script.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
