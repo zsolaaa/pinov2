@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-18T20:15:00+02:00",
+  "title": "Design System: Pinocchio Pizzéria",
+  "extensions": {
+    "colorMeta": {
+      "kemence-terrakotta": {
+        "role": "primary",
+        "displayName": "Kemence Terrakotta",
+        "canonical": "#b3492f",
+        "tonalRamp": ["#3a140c", "#5c2013", "#74291a", "#93361f", "#b3492f", "#c97350", "#dd9d7c", "#f8e3d5"]
+      },
+      "olive-branch": {
+        "role": "secondary",
+        "displayName": "Olívaág",
+        "canonical": "#5b6b45",
+        "tonalRamp": ["#14180e", "#232b17", "#3c4826", "#4a5a35", "#5b6b45", "#7b8d62", "#9daf85", "#e6ecd9"]
+      },
+      "warm-ivory": {
+        "role": "neutral",
+        "displayName": "Meleg Elefántcsont",
+        "canonical": "#faf6ee",
+        "tonalRamp": ["#2a2419", "#4a4230", "#6b5f46", "#9c8f6d", "#cabb96", "#eee6d3", "#f7f2e6", "#fdfbf6"]
+      },
+      "espresso-ink": {
+        "role": "neutral",
+        "displayName": "Espresso Tinta",
+        "canonical": "#211d16",
+        "tonalRamp": ["#0e0c08", "#1c1810", "#211d16", "#3a3327", "#544a39", "#6f6555", "#a99d87", "#d9cbac"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero címsor, kizárólag a Kezdőlapon." },
+      "headline": { "displayName": "Headline", "purpose": "Szekció-címek (h2) minden oldalon." },
+      "title": { "displayName": "Title", "purpose": "Kártya- és alszekció-címek (h3)." },
+      "body": { "displayName": "Body", "purpose": "Törzsszöveg, max 65-75ch sortáv." },
+      "label": { "displayName": "Label / Eyebrow", "purpose": "Kis-kapitális, ritkított feliratok, gomb-szöveg — szakasz-szinten, ritkán." }
+    },
+    "shadows": [
+      { "name": "cta-hover-glow", "value": "0 10px 26px rgba(179, 73, 47, 0.28)", "purpose": "Elsődleges gomb hover-állapota, terrakotta tónusban." },
+      { "name": "card-hover-lift", "value": "0 16px 32px rgba(33, 29, 22, 0.14)", "purpose": "Bento- és galéria-kártyák hover-állapota, semleges espresso tónusban." }
+    ],
+    "motion": [
+      { "name": "ease-out-primary", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Alapértelmezett ease-out minden UI mikroanimációhoz (gombok, nav, kártyák)." },
+      { "name": "ease-in-out-nav", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Mobil nav-panel nyitás/zárás max-height átmenete." },
+      { "name": "dur-fast", "value": "160ms", "purpose": "Press/active visszajelzés." },
+      { "name": "dur-base", "value": "220ms", "purpose": "Hover, fókusz, nav-váltás." },
+      { "name": "dur-reveal", "value": "600ms", "purpose": "Scroll-reveal belépő animáció, staggerelve `--i` alapján (60ms/elem)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "760px" },
+      { "name": "lg", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Elsődleges CTA (pl. \"Rendelés\"). Pill alakú, espresso háttér, terrakotta hover.",
+      "html": "<button class=\"ds-btn-primary\">Rendelés</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: #211d16; color: #ffffff; font-family: Manrope, sans-serif; font-weight: 600; font-size: 0.92rem; border-radius: 999px; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-primary:hover { background: #b3492f; box-shadow: 0 10px 26px rgba(179,73,47,0.28); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #b3492f; outline-offset: 2px; } .ds-btn-primary:active { transform: scale(0.97) translateY(0); transition-duration: 160ms; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Másodlagos akció (pl. \"Teljes étlap megtekintése\"). Átlátszó háttér, tömör hover.",
+      "html": "<button class=\"ds-btn-outline\">Teljes étlap megtekintése</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: transparent; color: #211d16; border: 1px solid #d9cbac; font-family: Manrope, sans-serif; font-weight: 600; font-size: 0.92rem; border-radius: 999px; transition: background 220ms cubic-bezier(0.23,1,0.32,1), color 220ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-outline:hover { background: #211d16; color: #ffffff; } .ds-btn-outline:focus-visible { outline: 2px solid #b3492f; outline-offset: 2px; }"
+    },
+    {
+      "name": "Info Card",
+      "kind": "card",
+      "refersTo": "info-card",
+      "description": "Nyitvatartás / Partnerek doboz — hajszálvonal keret, hover-emelés.",
+      "html": "<div class=\"ds-info-card\"><h3>Nyitvatartás</h3><p>Hétfő – Vasárnap: 11:00 – 22:00</p></div>",
+      "css": ".ds-info-card { background: #ffffff; border: 1px solid #e7ddc9; border-radius: 14px; padding: 36px; transition: box-shadow 220ms cubic-bezier(0.23,1,0.32,1), transform 220ms cubic-bezier(0.23,1,0.32,1); } .ds-info-card:hover { box-shadow: 0 16px 32px rgba(33,29,22,0.14); transform: translateY(-2px); } .ds-info-card h3 { font-family: Fraunces, serif; font-size: 1.2rem; color: #1c1810; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e7ddc9; } .ds-info-card p { color: #6f6555; font-family: Manrope, sans-serif; }"
+    },
+    {
+      "name": "Bento Photo Card",
+      "kind": "card",
+      "refersTo": "bento-card",
+      "description": "Fotó-alapú bento kártya sötét gradiens-átfedéssel és alsó címkével — signature komponens.",
+      "html": "<div class=\"ds-bento-photo\"><img src=\"https://images.unsplash.com/photo-1548365328-8b849e6c7b58?w=400\" alt=\"Pizza\"><div class=\"ds-bento-label\"><span class=\"ds-bento-tag\">Legnépszerűbb</span><span class=\"ds-bento-name\">Pizza válogatás</span></div></div>",
+      "css": ".ds-bento-photo { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid #e7ddc9; aspect-ratio: 4/3; transition: box-shadow 220ms cubic-bezier(0.23,1,0.32,1); } .ds-bento-photo:hover { box-shadow: 0 16px 32px rgba(33,29,22,0.14); } .ds-bento-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(0.23,1,0.32,1); } .ds-bento-photo:hover img { transform: scale(1.06); } .ds-bento-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15,10,6,0.75) 0%, rgba(15,10,6,0.05) 55%); } .ds-bento-label { position: absolute; left: 20px; bottom: 18px; z-index: 2; color: #ffffff; display: flex; flex-direction: column; } .ds-bento-tag { font-family: Manrope, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; } .ds-bento-name { font-family: Fraunces, serif; font-size: 1.1rem; font-weight: 600; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "form-input",
+      "description": "Kapcsolat-form mező — hajszálvonal keret, terrakotta fókusz-glow.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-email\">Email *</label><input id=\"ds-email\" type=\"email\" placeholder=\"nev@pelda.hu\"></div>",
+      "css": ".ds-field label { display: block; font-family: Manrope, sans-serif; font-size: 0.82rem; font-weight: 600; color: #6f6555; margin-bottom: 8px; letter-spacing: 0.02em; } .ds-field input { width: 100%; padding: 14px 16px; border: 1px solid #d9cbac; border-radius: 6px; background: #ffffff; font-family: Manrope, sans-serif; font-size: 0.95rem; color: #211d16; transition: border-color 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms cubic-bezier(0.23,1,0.32,1); } .ds-field input:focus { outline: none; border-color: #b3492f; box-shadow: 0 0 0 3px #f3e2d6; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Fő navigáció linkje — középről induló aláhúzás-animáció hover/active-on.",
+      "html": "<a href=\"#\" class=\"ds-nav-link ds-nav-link--active\">Étlap</a>",
+      "css": ".ds-nav-link { position: relative; display: inline-block; font-family: Manrope, sans-serif; font-size: 0.9rem; font-weight: 500; padding: 8px 14px; color: #6f6555; transition: color 220ms cubic-bezier(0.23,1,0.32,1); text-decoration: none; } .ds-nav-link::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px; background: #b3492f; border-radius: 2px; transform: scaleX(0); transition: transform 220ms cubic-bezier(0.23,1,0.32,1); } .ds-nav-link:hover, .ds-nav-link--active { color: #1c1810; } .ds-nav-link:hover::after, .ds-nav-link--active::after { transform: scaleX(1); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Trattoria",
+    "overview": "Egy visszafogott, sok levegőt hagyó felület mögött még mindig egy családi olasz pizzéria melege dolgozik. A rendszer nem hideg minimalizmus — az ivory alapszín, a Fraunces szerif és az egyetlen, magabiztos terrakotta akcentus együtt egy jól vezetett, precíz, de emberi étteremkönyv hangulatát adják. Fontos feszültség: a PRODUCT.md a márkát élénk/energikus/barátságosként rögzíti, míg ez a dokumentált rendszer jelenleg visszafogottabb, prémium-minimalista nyelvet beszél — ez a DESIGN.md a jelenlegi, ténylegesen megépített rendszert dokumentálja, nem a végső célállapotot.",
+    "keyCharacteristics": [
+      "Ivory alapszín + egyetlen terrakotta akcentus, ritkán és magabiztosan használva",
+      "Fraunces (display szerif) + Manrope (humanista sans) páros",
+      "Bento-rácsos kártyák a hagyományos egyenletes rácsok helyett",
+      "Hajszálvonalak és felszín-váltás adja a hierarchiát; finom, meleg tónusú árnyékok csak hover/focus válaszként",
+      "Staggered scroll-reveal + finom, teljesítmény-barát hero-parallax"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "A Kemence Terrakotta az egyetlen telített szín a rendszerben. Ha egy elemnek ki kell tűnnie, terrakotta lesz — soha nem egy második vagy harmadik konkuráló szín.", "section": "colors" },
+      { "name": "The No-Eyebrow-Everywhere Rule", "body": "Az eyebrow feliratok csak szakasz-szinten jelennek meg, oldalanként maximum 2-3 helyen.", "section": "typography" },
+      { "name": "The Response-Only Shadow Rule", "body": "Árnyék csak hover vagy focus-visible állapot válaszaként jelenhet meg; nyugalmi állapotban minden felszín lapos.", "section": "elevation" }
+    ],
+    "dos": [
+      "Tarts egyetlen telített akcentust (Kemence Terrakotta, #b3492f) — minden kiemelés ebből a színből jöjjön.",
+      "Használj hajszálvonalat (1px, #e7ddc9) elsődleges elválasztóként; árnyékot csak hover/focus válaszként.",
+      "Párosítsd a Fraunces display-fontot Manrope törzsszöveggel — kontrasztos tengelyen.",
+      "Korlátozd az eyebrow feliratokat szakasz-szintre, oldalanként 2-3 előfordulásra.",
+      "Biztosíts prefers-reduced-motion alternatívát minden animációhoz."
+    ],
+    "donts": [
+      "Ne vezess be második vagy harmadik telített akcentusszínt a Kemence Terrakotta mellé.",
+      "Ne használj border-left/border-right színes csík-akcentust kártyákon vagy listaelemeken.",
+      "Ne használj gradiens-szöveget — a hangsúlyt súllyal vagy mérettel add.",
+      "Ne tegyél eyebrow feliratot minden szekció fölé.",
+      "Ne keverd a papírtextúrás/kézzel-rajzolt trattoria nyelvet (a redesign mappa stílusa) ebbe a rendszerbe.",
+      "Ne alkalmazz árnyékot nyugalmi állapotban."
+    ]
+  }
+}
