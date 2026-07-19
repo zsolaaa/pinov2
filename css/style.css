@@ -274,6 +274,13 @@ h1, h2, h3, h4 {
   object-fit: cover;
   object-position: 50% 58%;
   will-change: transform;
+  /* A transformált nagy hero kép mobil böngészőkben (kiemelten iOS Safari)
+     hajlamos "villanni", amikor a kompozit rétegét újra kiszámolja. A
+     backface-visibility + translateZ stabil kompozit réteget kényszerít,
+     ami megszünteti a villogást. */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .hero::after {
@@ -1011,6 +1018,17 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 760px) {
+  /* A backdrop-filter: blur() a ragadós fejlécen minden görgetési képkockán
+     újraszámolja a mögötte lévő elmosott sávot - mobil GPU-n ez az egyik
+     legdrágább művelet, és önmagában is beakasztja a görgetést. Kis kijelzőn
+     tömör, épphogy áttetsző háttérre cseréljük - vizuálisan alig más, de a
+     görgetés simává válik. */
+  .site-header {
+    background: rgba(250, 246, 238, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .main-nav {
     position: fixed;
     top: 76px; left: 0; right: 0;

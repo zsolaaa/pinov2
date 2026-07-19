@@ -131,20 +131,29 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Finom, teljesítmény-barát hero parallax - csak transform, rAF-fel tördelve.
+  // Mobilon (kis kijelzőn / érintőképernyőn) szándékosan KIKAPCSOLVA: ott a
+  // nagy hero kép minden görgetési képkockán való újramozgatása okozta az
+  // akadást és a villogást (iOS Safariban a transformált + elmosott rétegek
+  // együtt villannak). Csak nagyobb, mutatós desktop nézeten fut.
   var heroImg = document.querySelector(".hero-bg-img");
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var allowParallax = window.matchMedia("(min-width: 760px) and (pointer: fine)").matches;
 
-  if (heroImg && !prefersReduced) {
+  if (heroImg && !prefersReduced && allowParallax) {
     var ticking = false;
     window.addEventListener("scroll", function () {
       if (!ticking) {
         window.requestAnimationFrame(function () {
           var offset = Math.min(window.scrollY * 0.12, 60);
-          heroImg.style.transform = "translateY(" + offset + "px)";
+          // translate3d -> saját kompozit réteg, GPU-n, layout/repaint nélkül.
+          heroImg.style.transform = "translate3d(0," + offset + "px,0)";
           ticking = false;
         });
         ticking = true;
       }
     }, { passive: true });
+  } else if (heroImg) {
+    // Nem fut parallax: ne tartsuk feleslegesen kompozit rétegen a nagy képet.
+    heroImg.style.willChange = "auto";
   }
 });
