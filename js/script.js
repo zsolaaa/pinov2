@@ -133,8 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Finom, teljesítmény-barát hero parallax - csak transform, rAF-fel tördelve.
   var heroImg = document.querySelector(".hero-bg-img");
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Mobilon/érintős eszközön kikapcsoljuk a parallaxot: ott a görgetéskor
+  // minden frame-ben újrapozicionált nagy kép akadozást okoz (gyengébb GPU +
+  // a böngésző címsorának ki/be úszása görgetéskor). A kép statikusan stabil.
+  var isTouchOrSmall = window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
 
-  if (heroImg && !prefersReduced) {
+  if (heroImg && !prefersReduced && !isTouchOrSmall) {
     var ticking = false;
     window.addEventListener("scroll", function () {
       if (!ticking) {

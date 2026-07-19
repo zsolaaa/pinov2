@@ -284,6 +284,13 @@ h1, h2, h3, h4 {
   will-change: transform;
 }
 
+/* Mobilon/érintős eszközön nincs parallax (lásd script.js), ezért a nagy
+   képet nem tartjuk feleslegesen külön GPU-rétegen - a will-change memóriát
+   foglalna és hozzájárulna a görgetési akadáshoz. A kép statikusan stabil. */
+@media (max-width: 900px), (pointer: coarse) {
+  .hero-bg-img { will-change: auto; }
+}
+
 .hero::after {
   content: "";
   position: absolute;
