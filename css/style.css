@@ -247,7 +247,13 @@ h1, h2, h3, h4 {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
+  /* svh (small viewport height) a vh helyett: Android Chrome-on a vh a
+     legnagyobb magassághoz igazodik, így görgetéskor a címsor ki/be úszásakor
+     a hero folyamatosan átméreteződött - ez látszott villogásnak/akadásnak.
+     Az svh a legkisebb (címsor látható) magassághoz köt, ezért görgetéskor
+     stabil marad, nem méreteződik át. A vh sor fallback régi böngészőkre. */
   min-height: 88vh;
+  min-height: 88svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
