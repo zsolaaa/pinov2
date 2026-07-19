@@ -254,8 +254,14 @@ h1, h2, h3, h4 {
 .hero-bg-img {
   position: absolute;
   inset: -6% -6%;
+  /* A globális `img { max-width: 100% }` reset felülírta ezt 112%-ról
+     100%-ra, ezért a bal -6% eltolás mellett a kép jobb széle 6%-kal
+     rövidebb lett a konténernél - sötét rés látszott ki alóla széles
+     nézeteken. max-width/max-height: none oldja fel a korlátot itt. */
   width: 112%;
   height: 112%;
+  max-width: none;
+  max-height: none;
   object-fit: cover;
   object-position: 50% 58%;
   will-change: transform;
@@ -654,6 +660,13 @@ h1, h2, h3, h4 {
 .about-cell:hover img { transform: scale(1.04); }
 
 .about-cell.text-cell {
+  /* A `.about-cell` alapból aspect-ratio:4/3 + overflow:hidden - fotóknál
+     jó, de a szöveges kártyáknál levágta a tartalmat (mobilon egy
+     oszlopban a 233px-es doboz csak pár sort engedett, a többi szöveg
+     eltűnt/összecsúszott a következő kártyával). Szöveges kártyán a
+     tartalom szabja meg a magasságot. */
+  aspect-ratio: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   justify-content: center;
