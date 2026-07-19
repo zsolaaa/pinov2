@@ -28,7 +28,7 @@
   --color-status-open: #7fce6d;
   --color-status-closed: #e4a24c;
 
-  --font-display: "Fraunces", "Georgia", serif;
+  --font-display: "Bevan", "Fraunces", "Georgia", serif;
   --font-body: "Manrope", "Segoe UI", sans-serif;
 
   --container-width: 1240px;
@@ -75,29 +75,33 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   color: var(--color-heading);
-  font-weight: 600;
+  /* Bevan ships one weight (400) - the slab strokes carry the weight
+     themselves, so headings ask for 400 everywhere rather than a
+     synthetic/faux-bold from requesting a weight the face doesn't have. */
+  font-weight: 400;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
-/* Kis, ritkított betűközű felirat - a script-akcentus helyett ez adja a finom hangsúlyt */
+/* Tömör jelvény a ritkított nagybetűs "kicker" helyett - /impeccable bolder,
+   playful energy irány. Elhagyja az AI-sablon kicker-mintát, és mellékesen
+   robusztusabban old meg minden hero/fotó-fölötti kontraszt-kérdést is,
+   mint egy csak-szöveg megoldás, mert nem függ az alatta lévő háttértől. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-weight: 700;
   font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
+  letter-spacing: 0.04em;
 }
 
 .eyebrow::before {
-  content: "";
-  width: 22px;
-  height: 1px;
-  background: var(--color-accent);
+  display: none;
 }
 
 /* ---------- Gombok ---------- */
@@ -261,14 +265,14 @@ h1, h2, h3, h4 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(20, 14, 8, 0.82) 0%, rgba(20, 14, 8, 0.25) 55%, rgba(20, 14, 8, 0.15) 100%);
+  background: linear-gradient(0deg, rgba(15, 10, 6, 0.9) 0%, rgba(15, 10, 6, 0.55) 42%, rgba(15, 10, 6, 0.22) 75%, rgba(15, 10, 6, 0.12) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   color: var(--color-white);
-  padding: 0 0 80px;
+  padding: 0 0 100px;
   max-width: 780px;
 }
 
@@ -314,19 +318,26 @@ h1, h2, h3, h4 {
   box-shadow: 0 0 0 3px rgba(228, 162, 76, 0.28);
 }
 
-.hero .eyebrow { color: var(--color-accent); margin-bottom: 18px; }
-.hero .eyebrow::before { background: var(--color-accent); }
+/* Az eyebrow most egy tömör, átlátszatlan jelvény (lásd fentebb), ezért nem
+   függ többé attól, mi van a fotón mögötte - nincs szükség külön szín-
+   trükkre a hero fölött. */
+.hero .eyebrow {
+  margin-bottom: 20px;
+}
 
 .hero h1 {
   color: var(--color-white);
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 6rem);
   margin-bottom: 20px;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.4);
 }
 
 .hero p {
   font-size: 1.1rem;
   color: rgba(255,255,255,0.82);
   max-width: 520px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   margin-bottom: 6px;
 }
 
@@ -361,9 +372,9 @@ h1, h2, h3, h4 {
 }
 
 /* ---------- Szekció ---------- */
-.section { padding: 120px 0; }
+.section { padding: 140px 0; }
 .section-tight { padding: 80px 0; }
-.section-surface { background: var(--color-surface); }
+.section-surface { background: var(--color-olive-soft); }
 
 .section-head {
   max-width: 640px;
@@ -426,6 +437,10 @@ h1, h2, h3, h4 {
    érzelmi csúcspont a hero és a záró CTA között. */
 .pull-quote-section {
   background: var(--color-accent);
+  /* Saját, szűkebb padding a globális .section 140px-je helyett - ez a
+     szekció önmagában egy rövid, egysoros-kétsoros pillanat legyen, ne
+     egy teljes görgetési képernyő. */
+  padding: 110px 0;
 }
 
 .pull-quote {
@@ -436,9 +451,10 @@ h1, h2, h3, h4 {
 
 .pull-quote p {
   font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  letter-spacing: -0.01em;
   color: var(--color-white);
   line-height: 1.4;
   text-wrap: balance;
@@ -501,30 +517,36 @@ h1, h2, h3, h4 {
   background: linear-gradient(0deg, rgba(15,10,6,0.75) 0%, rgba(15,10,6,0.05) 55%);
 }
 
-.bento-card.plain {
+/* Ikon-kártya - kis jelvény-ikon + rövid cím + egy sor leírás, sok levegővel.
+   A korábbi teli-színű "plain/bold" dobozok helyett: étteremhez illőbb,
+   nem SaaS-feature-kártya hatású. Fehér felület + hajszálvonal (a
+   .bento-card alap stílusából örökölve), nem telített színfelület. */
+.bento-card.icon-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 28px;
+  padding: 40px 36px;
+}
+
+.bento-card.icon-card .icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   background: var(--color-accent-soft);
+  color: var(--color-accent);
+  margin-bottom: 18px;
 }
 
-.bento-card.plain.olive { background: var(--color-olive-soft); }
-.bento-card.plain h3 { font-size: 1.3rem; margin-bottom: 8px; }
-.bento-card.plain p { color: var(--color-text-soft); font-size: 0.92rem; }
-
-/* Az egyetlen "Committed" bento-kártya - teli terrakotta, hogy legyen egy
-   valódi energikus pillanat a "Kedvenceink" rácsban is, nem csak a lapon egyszer. */
-.bento-card.plain.bold {
-  background: var(--color-accent);
+.bento-card.icon-card .icon-badge.olive {
+  background: var(--color-olive-soft);
+  color: var(--color-olive);
 }
 
-.bento-card.plain.bold h3,
-.bento-card.plain.bold p {
-  color: var(--color-white);
-}
-
-.bento-card.plain.bold p { opacity: 0.9; }
+.bento-card.icon-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.bento-card.icon-card p { color: var(--color-text-soft); font-size: 0.92rem; }
 
 /* ---------- Lábléc: social ---------- */
 .social-icons { display: flex; gap: 12px; }
@@ -543,7 +565,6 @@ h1, h2, h3, h4 {
 
 /* ---------- Záró meleg CTA — hogy az oldal ne fizetési jegyzeten fejeződjön be ---------- */
 .closing-cta {
-  margin-top: 48px;
   padding: 44px 36px;
   border-radius: var(--radius-lg);
   background: var(--color-accent);
@@ -574,6 +595,7 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 32px;
+  margin-top: 48px;
   margin-bottom: 24px;
 }
 
@@ -876,4 +898,23 @@ h1, h2, h3, h4 {
   .bento-grid, .gallery-bento { grid-template-columns: 1fr; grid-auto-rows: 220px; }
   .bento-card.span-2, .gallery-bento figure.span-2 { grid-column: span 1; }
   .footer-grid { flex-direction: column; }
+
+  /* Apró feliratok felskálázása mobilon - desktopon a nagy fehér tér mellett
+     működik a finom, kis méretű kiegészítő szöveg, de kisebb kijelzőn ugyanaz
+     a méret + tág betűköz miatt olvashatatlanná, "elvesző" zajjá válik. */
+  .eyebrow { font-size: 0.85rem; letter-spacing: 0.13em; }
+  .bento-card .bento-label .tag { font-size: 0.8rem; }
+  .hero-status { font-size: 0.88rem; }
+  .menu-category-head span { font-size: 0.85rem; }
+  .menu-item-desc { font-size: 0.92rem; }
+  .menu-note { font-size: 0.9rem; }
+  .menu-legal { font-size: 0.85rem; }
+  .menu-subhead { font-size: 1rem; }
+  .form-group label { font-size: 0.88rem; }
+  .form-error { font-size: 0.9rem; }
+  .payment-note { font-size: 0.9rem; }
+  .support-item p, .support-highlight { font-size: 0.95rem; }
+  .site-footer .footer-bottom { font-size: 0.9rem; }
+  .placeholder-img { font-size: 0.85rem; }
+  .pull-quote cite { font-size: 0.88rem; letter-spacing: 0.08em; }
 }
