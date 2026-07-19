@@ -5,23 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!nav || !categories.length || !navLinks.length) return;
 
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var header = document.querySelector(".site-header");
 
   function offsetTop(el) {
     return el.getBoundingClientRect().top + window.scrollY;
   }
 
-  // Kattintásra ugrás a kategóriára - a sticky fejléc + a sticky kategória-sáv
-  // magasságát figyelembe véve, hogy a cím ne csússzon alájuk.
+  // A sticky fejléc + sticky kategória-sáv együttes magassága - a kattintásos
+  // ugrás és az aktív-jelző közös referenciavonala, hogy a kettő egyezzen.
+  function stickyOffset() {
+    var headerH = header ? header.getBoundingClientRect().height : 0;
+    return headerH + nav.getBoundingClientRect().height + 16;
+  }
+
+  // Kattintásra ugrás a kategóriára - a sticky elemek magasságát figyelembe
+  // véve, hogy a cím ne csússzon alájuk.
   navLinks.forEach(function (link) {
     link.addEventListener("click", function (event) {
-      var targetId = link.getAttribute("href");
-      var target = document.querySelector(targetId);
+      var target = document.querySelector(link.getAttribute("href"));
       if (!target) return;
       event.preventDefault();
-      var header = document.querySelector(".site-header");
-      var offset = (header ? header.getBoundingClientRect().height : 0) + nav.getBoundingClientRect().height + 16;
       window.scrollTo({
-        top: offsetTop(target) - offset,
+        top: offsetTop(target) - stickyOffset(),
         behavior: prefersReduced ? "auto" : "smooth"
       });
     });
@@ -38,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
     var activeLink = navLinks[index];
+    if (!activeLink) return;
     var navRect = nav.getBoundingClientRect();
     var linkRect = activeLink.getBoundingClientRect();
     if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
@@ -45,26 +51,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // A GSAP/ScrollTrigger CDN-ről töltődik; ha valamiért nem érhető el
-  // (lassú/hibás hálózat), a fenti kattintásos ugrás akkor is működik -
-  // csak az automatikus aktív-állapot-jelzés marad el.
-  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-  gsap.registerPlugin(ScrollTrigger);
-
-  categories.forEach(function (category, index) {
-    // A kategóriák közt 72px rés van (`.menu-categories { gap: 72px }`) - ha
-    // az "end" a saját elem aljára mutatna, ez a rés holt zóna lenne, ahol
-    // egyik kategória sem aktív. Az "end" ezért a KÖVETKEZŐ kategória
-    // tetejéig tart, hézag nélkül; az utolsónál a saját alja marad a vég.
-    var next = categories[index + 1];
-    ScrollTrigger.create({
-      trigger: category,
-      start: "top 150px",
-      endTrigger: next || category,
-      end: next ? "top 150px" : "bottom 150px",
-      onToggle: function (self) {
-        if (self.isActive) setActive(index);
+  // Determinisztikus scroll-spy: az aktív szakasz mindig az, amelyik épp a
+  // menü-sáv alatt van - vagyis az UTOLSÓ kategória, amelynek a teteje már a
+  // referenciavonal fölé került. Ez pontosan azt jelöli, amit a felhasználó
+  // néz, off-by-one lemaradás nélkül, és nem függ külső könyvtártól (GSAP).
+  var currentIndex = -1;
+  function updateActive() {
+    // A vonal pár px-el a sticky sáv alatt van, hogy a kattintással odaugrott
+    // cím (ami épp a sáv alá kerül) biztosan az adott szakaszt jelölje.
+    var line = nav.getBoundingClientRect().bottom + 24;
+    var index = 0;
+    for (var i = 0; i < categories.length; i++) {
+      if (categories[i].getBoundingClientRect().top <= line) {
+        index = i;
+      } else {
+        break;
       }
-    });
-  });
+    }
+    if (index !== currentIndex) {
+      currentIndex = index;
+      setActive(index);
+    }
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        updateActive();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", updateActive, { passive: true });
+  updateActive();
 });
