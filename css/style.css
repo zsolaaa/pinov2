@@ -632,39 +632,91 @@ h1, h2, h3, h4 {
   list-style: none;
 }
 
+/* A kártya az oldal nagy lekerekítésű, meleg nyelvét követi, nem a
+   szokásos "review widget" mintát: radius-lg, bőséges belső margó,
+   és hajszálvonal helyett egy meleg tónusú, nagy szórású árnyék
+   viszi a síkokat. A keret megmarad, de szinte láthatatlanul halvány
+   - csak a kártya élét zárja le a krém háttéren. */
 .review-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 28px 26px;
+  gap: 18px;
+  padding: 42px 36px 32px;
+  min-height: 340px;
   background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
+  border: 1px solid rgba(231, 221, 201, 0.7);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 4px rgba(93, 64, 42, 0.03),
+              0 14px 34px -12px rgba(93, 64, 42, 0.10);
 }
 
-.review-stars {
-  display: flex;
-  gap: 3px;
-  color: var(--color-accent);
+/* Nagy idézőjel a kártya nyitányaként. A display-betűtípus (Bevan)
+   adja a szükséges súlyt, accent-soft színben, hogy hangsúlyos
+   forma legyen, de ne vonja el a figyelmet a szövegtől. */
+.review-mark {
+  font-family: var(--font-display);
+  font-size: 4.2rem;
+  line-height: 0.5;
+  color: var(--color-accent-soft);
+  /* A „ a betűtörzs alján ül; ez emeli optikailag a helyére. */
+  height: 26px;
+  user-select: none;
 }
-
-.review-stars svg { width: 17px; height: 17px; fill: currentColor; }
 
 .review-card blockquote {
-  font-size: 0.97rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.75;
   color: var(--color-ink);
-  /* A három vélemény eltérő hosszú; a cite így is egy vonalban zár. */
+  /* A három vélemény eltérő hosszú; a szerző így is egy vonalban zár. */
   flex-grow: 1;
+}
+
+/* Szerző + értékelés egy egységben: a csillag ahhoz tartozik, aki adta. */
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+}
+
+.review-avatar {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-dark);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.review-author-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
 }
 
 .review-card cite {
   font-style: normal;
   font-weight: 600;
-  font-size: 0.88rem;
-  color: var(--color-text-soft);
-  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  color: var(--color-heading);
+  letter-spacing: 0.01em;
 }
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+  color: var(--color-accent);
+}
+
+.review-stars svg { width: 14px; height: 14px; fill: currentColor; }
 
 @media (max-width: 860px) {
   /* Mobilon vízszintesen görgethető sáv: a három kártya egymás alatt
@@ -683,11 +735,20 @@ h1, h2, h3, h4 {
     scrollbar-width: thin;
   }
 
+  /* Szélesebb kártya és szűkebb vízszintes margó: a bőséges asztali
+     belső margó mobilon 200px alá szorítaná a szövegoszlopot, ami a
+     hosszabb véleményt a képernyő magasságáig tördelné. */
   .review-card {
-    flex: 0 0 78%;
+    flex: 0 0 85%;
     scroll-snap-align: start;
-    padding: 22px 20px;
+    padding: 30px 24px 24px;
+    min-height: 0;
+    gap: 15px;
   }
+
+  .review-card blockquote { font-size: 0.95rem; line-height: 1.7; }
+
+  .review-mark { font-size: 3.4rem; height: 21px; }
 
   .reviews-head { margin-bottom: 28px; }
 }
