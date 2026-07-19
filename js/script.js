@@ -176,11 +176,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!summary || !answer || !answer.animate) return;
 
     var running = null;
-    // A szándékolt állapotot külön követjük az `open` attribútumtól. Záráskor
-    // az attribútum csak az animáció végén kerül le - ha közben újra
-    // kattintanak, az attribútum még `true`, és pusztán abból nem lehetne
-    // eldönteni, hogy a felhasználó most nyitni vagy zárni akar.
-    var expanded = item.open;
+    // Záráskor az `open` attribútum csak az animáció végén kerül le, tehát
+    // közben az attribútum még `true`. Ezt az egyetlen átmeneti fázist
+    // jelöljük külön; minden más esetben az attribútum az igazság forrása,
+    // így nem tud tartósan szétcsúszni a két állapot.
+    var closing = false;
 
     summary.addEventListener("click", function (e) {
       // Csökkentett mozgás esetén maradjon a natív, azonnali viselkedés.
@@ -196,31 +196,47 @@ document.addEventListener("DOMContentLoaded", function () {
         running = null;
       }
 
-      expanded = !expanded;
+      // Záró animáció közbeni kattintás = a felhasználó vissza akar nyitni.
+      var shouldOpen = closing || !item.open;
+      closing = false;
 
-      if (expanded) {
+      // A belső margót együtt kell animálni a magassággal. border-box
+      // méretezésnél egy elem nem lehet alacsonyabb a saját belső margójánál,
+      // így a magasság önmagában a padding értékénél megáll - záráskor ez
+      // egy jól látható akadást okozott a mozgás végén.
+      var pad = window.getComputedStyle(answer).paddingBottom;
+
+      if (shouldOpen) {
         item.open = true;
         var full = answer.offsetHeight;
         running = answer.animate(
           [
-            { height: current + "px", opacity: 0, transform: "translateY(-6px)" },
-            { height: full + "px", opacity: 1, transform: "translateY(0)" }
+            { height: current + "px", paddingBottom: "0px", opacity: 0, transform: "translateY(-6px)" },
+            { height: full + "px", paddingBottom: pad, opacity: 1, transform: "translateY(0)" }
           ],
           { duration: 260, easing: FAQ_EASE }
         );
         running.onfinish = function () { running = null; };
       } else {
+        closing = true;
         running = answer.animate(
           [
-            { height: current + "px", opacity: 1, transform: "translateY(0)" },
-            { height: "0px", opacity: 0, transform: "translateY(-4px)" }
+            { height: current + "px", paddingBottom: pad, opacity: 1, transform: "translateY(0)" },
+            { height: "0px", paddingBottom: "0px", opacity: 0, transform: "translateY(-4px)" }
           ],
-          { duration: 200, easing: FAQ_EASE }
+          // fill:"forwards" nélkül az animáció végén az elem egy frame erejéig
+          // visszakapná a teljes magasságát, mielőtt az `open` levétele
+          // érvényesül - ez okozta a záráskori akadást.
+          { duration: 200, easing: FAQ_EASE, fill: "forwards" }
         );
         running.onfinish = function () {
-          // Csak akkor zárjuk le ténylegesen, ha időközben nem nyitották
-          // vissza - különben a tartalom eltűnne a nyitó animáció alól.
-          if (!expanded) item.open = false;
+          if (closing) {
+            item.open = false;
+            closing = false;
+          }
+          // Az `open` levétele után a tartalom már nem látszik, így a
+          // kitartott stílus elengedése nem villan.
+          if (running) running.cancel();
           running = null;
         };
       }
