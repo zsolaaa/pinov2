@@ -401,11 +401,22 @@ h1, h2, h3, h4 {
   top: 28px;
   right: 32px;
   z-index: 2;
+  display: block;
   background: rgba(255,255,255,0.94);
-  padding: 8px 18px;
+  padding: 10px 20px;
   border-radius: 999px;
   box-shadow: 0 8px 20px rgba(33, 29, 22, 0.22);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .funding-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(33, 29, 22, 0.28);
+  }
+}
+
+.funding-banner:active { transform: scale(0.97); }
 
 /* ---------- Szekció ---------- */
 .section { padding: 140px 0; }
