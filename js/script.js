@@ -33,6 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Étlap: minden kategórián belül indexeljük a tételeket, hogy a CSS --mi
+  // alapján lépcsőzve ússzanak be, amikor a kategória láthatóvá válik.
+  // A késleltetést ~12 tételnél lekapjuk, hogy hosszú listán ne legyen vontatott.
+  document.querySelectorAll(".menu-category").forEach(function (cat) {
+    Array.prototype.forEach.call(cat.querySelectorAll(".menu-item"), function (item, i) {
+      item.style.setProperty("--mi", Math.min(i, 12));
+    });
+  });
+
+  // Fejléc: finom árnyék/tömörebb háttér, ha már görgettünk pár pixelt.
+  // rAF-fel tördelve, passzív listenerrel - nem terheli a görgetést.
+  var siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    var headerTicking = false;
+    var applyHeaderState = function () {
+      siteHeader.classList.toggle("scrolled", window.scrollY > 8);
+      headerTicking = false;
+    };
+    applyHeaderState();
+    window.addEventListener("scroll", function () {
+      if (!headerTicking) {
+        window.requestAnimationFrame(applyHeaderState);
+        headerTicking = true;
+      }
+    }, { passive: true });
+  }
+
   var revealEls = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && revealEls.length) {
     var observer = new IntersectionObserver(

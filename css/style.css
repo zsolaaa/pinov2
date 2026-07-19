@@ -1073,3 +1073,94 @@ h1, h2, h3, h4 {
   .placeholder-img { font-size: 0.85rem; }
   .pull-quote cite { font-size: 0.88rem; letter-spacing: 0.08em; }
 }
+
+/* ===========================================================
+   Emil design-eng polish réteg
+   Ízléses, visszafogott mozgás: transform/opacity alapon (GPU),
+   érintős eszközön nincs beragadó hover, minden nyomható elem ad
+   press-visszajelzést, és minden a meglévő --ease-out görbét használja.
+   =========================================================== */
+
+/* --- 1. Press-visszajelzés (Emil: minden nyomható elem "hallja" a kattintást) --- */
+.nav-toggle { transition: transform var(--dur-fast) var(--ease-out); }
+.nav-toggle:active { transform: scale(0.9); }
+.social-icons a:active { transform: scale(0.9); }
+.header-phone:active { transform: scale(0.96); }
+.menu-nav a { transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out); }
+.menu-nav a:active { transform: scale(0.95); }
+
+/* --- 2. Fotó-bento kártyák emelése hoverre (az ikon-kártyák már emelkednek) --- */
+@media (hover: hover) and (pointer: fine) {
+  .bento-card.has-photo {
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  }
+  .bento-card.has-photo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(33, 29, 22, 0.16);
+  }
+}
+
+/* --- 3. Galéria: finom kép-beúszó zoom a beúszás mellé (Emil: a fotó
+   "a helyére ül"). A figure a bevált opacity-revealt használja (a clip-path
+   nullázná az IntersectionObserver arányát, így a kép sosem jelenne meg),
+   a fotó pedig 1.08-ról settle-el a helyére, amikor a figure láthatóvá válik. --- */
+.gallery-bento figure[data-reveal] img {
+  transform: scale(1.08);
+  transition: transform 720ms var(--ease-out);
+}
+.gallery-bento figure[data-reveal].is-visible img { transform: scale(1); }
+
+/* --- 4. Fejléc: finom árnyék + tömörebb háttér, ha már görgettünk (JS .scrolled) --- */
+.site-header {
+  transition: box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
+}
+.site-header.scrolled {
+  background: rgba(250, 246, 238, 0.94);
+  box-shadow: 0 6px 24px rgba(33, 29, 22, 0.07);
+}
+
+/* --- 5. Étlap-tételek lépcsőzött beúszása, amikor a kategória láthatóvá válik.
+   A --mi indexet a script.js állítja kategóriánként. --- */
+.menu-category[data-reveal] .menu-item {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.menu-category[data-reveal].is-visible .menu-item {
+  animation: menuItemReveal 440ms var(--ease-out) forwards;
+  animation-delay: calc(var(--mi, 0) * 40ms);
+}
+@keyframes menuItemReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 6. :focus-visible gyűrűk (akadálymentesség + polish) --- */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.btn:focus-visible, a:focus-visible, .social-icons a:focus-visible {
+  outline-offset: 4px;
+}
+
+/* --- 7. Érintős eszközön ne "ragadjon be" egyetlen hover-transform sem
+   (Emil: a tap hamis hover-t vált ki mobilon). --- */
+@media (hover: none) {
+  .intro-img:hover img,
+  .bento-card:hover img,
+  .about-cell:hover img,
+  .gallery-bento figure:hover img { transform: none; }
+  .bento-card.icon-card:hover { transform: none; box-shadow: none; }
+  .bento-card.icon-card:hover .icon-badge { transform: none; }
+  .menu-item:hover { transform: none; }
+  .social-icons a:hover { transform: none; }
+}
+
+/* --- 8. Reduced-motion: az étlap-stagger és a clip-path se mozogjon,
+   de a tartalom mindig látszódjon (nem tűnhet el). --- */
+@media (prefers-reduced-motion: reduce) {
+  .menu-category[data-reveal] .menu-item { opacity: 1; transform: none; animation: none; }
+  .gallery-bento figure[data-reveal] img { transform: none; }
+}
