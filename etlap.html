@@ -28,7 +28,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span class="phone-text">+36 30 755 6846</span>
         </a>
-        <button class="nav-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+        <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
@@ -41,11 +41,22 @@
     </div>
   </section>
 
+  <nav class="menu-nav" aria-label="Étlap kategóriák">
+    <a href="#pizza">Pizza</a>
+    <a href="#pasta">Pasta</a>
+    <a href="#in-salate">In Salate</a>
+    <a href="#extra-feltetek">Extra feltétek</a>
+    <a href="#desszertek">Desszertek</a>
+    <a href="#italok">Italok</a>
+    <a href="#uditok">Üdítők</a>
+    <a href="#kavek">Kávék</a>
+  </nav>
+
   <section class="section-tight">
     <div class="container">
       <div class="menu-categories" data-reveal-group>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="pizza" data-reveal>
           <div class="menu-category-head"><h3>Pizza</h3><span>20 tétel</span></div>
           <div class="menu-item"><div><div class="menu-item-name">Margherita</div><div class="menu-item-desc">paradicsomszósz, mozzarella</div></div><div class="menu-item-price">2690,- Ft</div></div>
           <div class="menu-item"><div><div class="menu-item-name">Salame</div><div class="menu-item-desc">paradicsomszósz, mozzarella, olasz (dolce) szalámi</div></div><div class="menu-item-price">3090,- Ft</div></div>
@@ -70,7 +81,7 @@
           <p class="menu-note">Csomagolás 200,- Ft &middot; Pizzaszósz 300,- Ft &middot; Csípős pizzaszósz 300,- Ft</p>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="pasta" data-reveal>
           <div class="menu-category-head"><h3>Pasta</h3><span>11 tétel</span></div>
           <div class="menu-item"><div><div class="menu-item-name">Arabiata</div><div class="menu-item-desc">paradicsomszósz, fokhagymás olivaolaj, chili, koktélparadicsom, parmezán, spagetti</div></div><div class="menu-item-price">2990,- Ft</div></div>
           <div class="menu-item"><div><div class="menu-item-name">Pomodoro</div><div class="menu-item-desc">paradicsomszósz, fokhagymás olivaolaj, koktélparadicsom, parmezán, spagetti</div></div><div class="menu-item-price">2890,- Ft</div></div>
@@ -86,14 +97,14 @@
           <p class="menu-note">Igény szerint cserélhető tészta kínálatunk: Tagliatelle, Spaghetti, Gnocchi, Penne</p>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="in-salate" data-reveal>
           <div class="menu-category-head"><h3>In Salate</h3><span>3 tétel</span></div>
           <div class="menu-item"><div><div class="menu-item-name">Vegetariana</div><div class="menu-item-desc">jégsaláta, rukkola, fekete olivabogyó, mozzarella, parmezán sajt, olivaolaj, balzsamkrém, koktélparadicsom, Focaccia (pizzakenyér)</div></div><div class="menu-item-price">2890,- Ft</div></div>
           <div class="menu-item"><div><div class="menu-item-name">Tonno e Olive</div><div class="menu-item-desc">vegetáriánus saláta alap, tonhal, fokhagymás olivaolaj, Foccia (pizzakenyér)</div></div><div class="menu-item-price">2990,- Ft</div></div>
           <div class="menu-item"><div><div class="menu-item-name">Parma e Pomodori</div><div class="menu-item-desc">vegetáriánus saláta alap, pármai sonka, Foccia (pizzakenyér)</div></div><div class="menu-item-price">2990,- Ft</div></div>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="extra-feltetek" data-reveal>
           <div class="menu-category-head"><h3>Extra feltétek</h3><span>16 tétel</span></div>
           <p class="menu-subhead">Sajtok</p>
           <div class="menu-item"><div class="menu-item-name">Mozzarella sajt (Fior di Latte)</div><div class="menu-item-price">350,- Ft</div></div>
@@ -116,12 +127,12 @@
           <div class="menu-item"><div class="menu-item-name">Gomba</div><div class="menu-item-price">300,- Ft</div></div>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="desszertek" data-reveal>
           <div class="menu-category-head"><h3>Desszertek</h3><span>napi ajánlat</span></div>
           <div class="menu-item"><div><div class="menu-item-name">Napi desszert</div><div class="menu-item-desc">profiterol / tiramisu / pana cotta / epres süti — napi desszert kínálatunkról érdeklődj a pultnál!</div></div></div>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="italok" data-reveal>
           <div class="menu-category-head"><h3>Italok</h3><span>9 tétel</span></div>
           <div class="menu-item"><div class="menu-item-name">Birra Moretti csapolt sör (pohár/korsó)</div><div class="menu-item-price">800/1200,- Ft</div></div>
           <div class="menu-item"><div class="menu-item-name">Peroni sör (0,33 l)</div><div class="menu-item-price">700,- Ft</div></div>
@@ -134,7 +145,7 @@
           <div class="menu-item"><div class="menu-item-name">Pálinka (2cl/4cl)</div><div class="menu-item-price">750/1500,- Ft</div></div>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="uditok" data-reveal>
           <div class="menu-category-head"><h3>Üdítők</h3><span>5 tétel</span></div>
           <div class="menu-item"><div><div class="menu-item-name">Üdítők (0,33 l)</div><div class="menu-item-desc">Coca Cola, Coca Cola Zéró, Fanta, Sprite</div></div><div class="menu-item-price">700,- Ft</div></div>
           <div class="menu-item"><div><div class="menu-item-name">Cappy Juice-ok (0,25 l)</div><div class="menu-item-desc">alma, eper, körte, őszibarack, narancs</div></div><div class="menu-item-price">700,- Ft</div></div>
@@ -143,7 +154,7 @@
           <div class="menu-item"><div><div class="menu-item-name">Naturaqua (0,33 l, üveges)</div><div class="menu-item-desc">szénsavas, szénsavmentes</div></div><div class="menu-item-price">400,- Ft</div></div>
         </div>
 
-        <div class="menu-category" data-reveal>
+        <div class="menu-category" id="kavek" data-reveal>
           <div class="menu-category-head"><h3>Kávék</h3><span>5 tétel</span></div>
           <div class="menu-item"><div class="menu-item-name">Espresso kávé</div><div class="menu-item-price">600,- Ft</div></div>
           <div class="menu-item"><div class="menu-item-name">Hosszú kávé</div><div class="menu-item-price">600,- Ft</div></div>
@@ -203,6 +214,10 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <!-- GSAP ScrollTrigger — csak ezen az oldalon (Étlap kategória-navigáció), a többi 5 oldal nem tölti be -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/menu-nav.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

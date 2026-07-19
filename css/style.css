@@ -218,6 +218,9 @@ h1, h2, h3, h4 {
 .header-actions { display: flex; align-items: center; gap: 22px; }
 
 .nav-toggle {
+  /* appearance:auto a natív OS gomb-widgetet használta, ami elnyomta a
+     gyerek span-ek CSS transformját (a hamburger sosem animálódott X-é). */
+  appearance: none;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -234,6 +237,12 @@ h1, h2, h3, h4 {
   border-radius: 999px;
   transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
 }
+
+/* Hamburger -> X: a menü nyitott/zárt állapota eddig semmilyen vizuális
+   visszajelzést nem adott az ikonon magán, csak a lenyíló panel jelezte. */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -401,6 +410,37 @@ h1, h2, h3, h4 {
 
 [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
+/* Az idézet és a záró CTA nem lista-elemek, hanem a lap két egyedi
+   érzelmi csúcspontja - a generikus fade+rise helyett saját ütemet és
+   anyagot kapnak, hogy ne "minden szekció ugyanaz a fade" AI-mintaként
+   hasson. Az idézetnél elmosódásból élesedő, enyhén zsugorodó belépés
+   ("focus pull"); a CTA-nál magabiztosabb, gyorsabb scale-in érkezés. */
+.pull-quote[data-reveal] {
+  transform: none;
+  filter: blur(6px) opacity(0);
+  transition: filter 700ms var(--ease-out);
+  transition-delay: 0s;
+}
+.pull-quote[data-reveal].is-visible {
+  transform: none;
+  filter: blur(0) opacity(1);
+}
+
+.closing-cta[data-reveal] {
+  transform: scale(0.96);
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out);
+  transition-delay: 0s;
+}
+.closing-cta[data-reveal].is-visible { opacity: 1; transform: scale(1); }
+
+/* A fotó nem szöveg - enyhe zoom-in illik hozzá jobban, mint az emelkedés. */
+.intro-img[data-reveal] {
+  transform: scale(1.06);
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+}
+.intro-img[data-reveal].is-visible { transform: scale(1); }
+
 /* ---------- Intro editorial split ---------- */
 .intro-grid {
   display: grid;
@@ -545,6 +585,15 @@ h1, h2, h3, h4 {
   flex-direction: column;
   justify-content: center;
   padding: 40px 36px;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* A szomszédos fotókártyák hoverkor élnek (zoom + emelés); az ikonkártyák
+   eddig semmilyen visszajelzést nem adtak - ugyanazt a "Kártya hover-
+   emelés" szótárt kapják, a jelvényen egy kis saját mozdulattal. */
+.bento-card.icon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(33, 29, 22, 0.14);
 }
 
 .bento-card.icon-card .icon-badge {
@@ -557,7 +606,10 @@ h1, h2, h3, h4 {
   background: var(--color-accent-soft);
   color: var(--color-accent);
   margin-bottom: 18px;
+  transition: transform var(--dur-base) var(--ease-out);
 }
+
+.bento-card.icon-card:hover .icon-badge { transform: scale(1.1) rotate(-4deg); }
 
 .bento-card.icon-card .icon-badge.olive {
   background: var(--color-olive-soft);
@@ -775,8 +827,51 @@ h1, h2, h3, h4 {
 
 .gallery-bento figure:hover img { transform: scale(1.06); }
 
+/* ---------- Étlap: sticky kategória-navigáció ---------- */
+/* Egyetlen funkcionális scroll-vezérelt elem az oldalon (GSAP ScrollTrigger,
+   csak ezen az oldalon betöltve) - jelzi, melyik kategóriánál jársz, és
+   kattintásra oda ugrik. Nem dekoráció: hosszú étlapon valódi tájékozódást ad. */
+.menu-nav {
+  position: sticky;
+  top: 81px;
+  z-index: 40;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  padding: 14px 32px;
+  margin-bottom: 8px;
+}
+
+.menu-nav::-webkit-scrollbar { display: none; }
+
+.menu-nav a {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  border: 1px solid var(--color-line-strong);
+  white-space: nowrap;
+  transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+
+.menu-nav a:hover { border-color: var(--color-accent); color: var(--color-heading); }
+
+.menu-nav a.active {
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+}
+
 /* ---------- Étlap ---------- */
 .menu-categories { display: grid; gap: 72px; }
+.menu-category { scroll-margin-top: 150px; }
 
 .menu-category-head {
   display: flex;
