@@ -160,6 +160,72 @@ document.addEventListener("DOMContentLoaded", function () {
   // Finom, teljesítmény-barát hero parallax - csak transform, rAF-fel tördelve.
   var heroImg = document.querySelector(".hero-bg-img");
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- GYIK: lenyíló animáció ----------
+  // A natív <details> azonnal ugrik nyitáskor, animáció nélkül. Itt átvesszük
+  // a nyitás vezérlését, de a nyitott állapotot továbbra is az `open`
+  // attribútum tartja - így a szemantika, a billentyűzet-kezelés és a
+  // képernyőolvasók viselkedése érintetlen marad. Ha a szkript nem fut le,
+  // a harmonika natívan működik tovább, csak animáció nélkül.
+  var faqItems = document.querySelectorAll(".faq-item");
+  var FAQ_EASE = "cubic-bezier(0.23, 1, 0.32, 1)";
+
+  Array.prototype.forEach.call(faqItems, function (item) {
+    var summary = item.querySelector("summary");
+    var answer = item.querySelector(".faq-answer");
+    if (!summary || !answer || !answer.animate) return;
+
+    var running = null;
+    // A szándékolt állapotot külön követjük az `open` attribútumtól. Záráskor
+    // az attribútum csak az animáció végén kerül le - ha közben újra
+    // kattintanak, az attribútum még `true`, és pusztán abból nem lehetne
+    // eldönteni, hogy a felhasználó most nyitni vagy zárni akar.
+    var expanded = item.open;
+
+    summary.addEventListener("click", function (e) {
+      // Csökkentett mozgás esetén maradjon a natív, azonnali viselkedés.
+      if (prefersReduced) return;
+
+      e.preventDefault();
+
+      // A pillanatnyi magasságot még az animáció megszakítása előtt mérjük,
+      // hogy félbeszakításkor onnan folytassa, ahol tart - ne ugorjon.
+      var current = answer.getBoundingClientRect().height;
+      if (running) {
+        running.cancel();
+        running = null;
+      }
+
+      expanded = !expanded;
+
+      if (expanded) {
+        item.open = true;
+        var full = answer.offsetHeight;
+        running = answer.animate(
+          [
+            { height: current + "px", opacity: 0, transform: "translateY(-6px)" },
+            { height: full + "px", opacity: 1, transform: "translateY(0)" }
+          ],
+          { duration: 260, easing: FAQ_EASE }
+        );
+        running.onfinish = function () { running = null; };
+      } else {
+        running = answer.animate(
+          [
+            { height: current + "px", opacity: 1, transform: "translateY(0)" },
+            { height: "0px", opacity: 0, transform: "translateY(-4px)" }
+          ],
+          { duration: 200, easing: FAQ_EASE }
+        );
+        running.onfinish = function () {
+          // Csak akkor zárjuk le ténylegesen, ha időközben nem nyitották
+          // vissza - különben a tartalom eltűnne a nyitó animáció alól.
+          if (!expanded) item.open = false;
+          running = null;
+        };
+      }
+    });
+  });
   // Mobilon/érintős eszközön kikapcsoljuk a parallaxot: ott a görgetéskor
   // minden frame-ben újrapozicionált nagy kép akadozást okoz (gyengébb GPU +
   // a böngésző címsorának ki/be úszása görgetéskor). A kép statikusan stabil.

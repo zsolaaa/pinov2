@@ -812,9 +812,12 @@ h1, h2, h3, h4 {
 
 .faq-item[open] .faq-icon { transform: rotate(180deg); }
 
+/* overflow:hidden + a globális border-box: így a magasság 0-ra
+   animálásakor a belső margó is levágódik, nem ugrik meg a záráskor. */
 .faq-answer {
   padding: 0 4px 26px;
   max-width: 62ch;
+  overflow: hidden;
 }
 
 .faq-answer p {
