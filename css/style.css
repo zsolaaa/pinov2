@@ -399,26 +399,39 @@ h1, h2, h3, h4 {
 .intro-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 64px;
   align-items: center;
 }
 
-.intro-grid p { margin-bottom: 16px; color: var(--color-text-soft); }
+/* h2-nek korábban nem volt saját font-size-a (böngésző-alapértelmezett
+   24px-re esett vissza, szemben a többi szekció-cím akár 41px-ével), az
+   eyebrow alatt pedig 0px volt a rés - ez a két hiányzó stílus tette
+   soványnak a szövegoszlopot a magas kép mellett. */
+.intro-grid .eyebrow { margin-bottom: 16px; }
+
+.intro-grid h2 {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  margin-bottom: 6px;
+}
+
+.intro-grid p { margin-bottom: 16px; font-size: 1.15rem; color: var(--color-text-soft); }
 
 .intro-grid .signature {
   margin-top: 28px;
   padding-top: 24px;
   border-top: 1px solid var(--color-line);
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-heading);
 }
 
 .intro-grid .signature small {
   display: block;
+  font-size: 1.05rem;
   font-weight: 400;
   font-style: italic;
   color: var(--color-text-soft);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .intro-img {
@@ -839,9 +852,22 @@ h1, h2, h3, h4 {
 
 /* ---------- Lábléc ---------- */
 .site-footer {
+  position: relative;
   background: var(--color-ink);
   color: rgba(255,255,255,0.85);
-  padding: 56px 0 32px;
+  padding: 76px 0 40px;
+}
+
+/* Vékony terrakotta vonal a lábléc tetején - kis, de tudatos márka-jel,
+   ami elválasztja a footert a tartalomtól anélkül, hogy teli sávot kérne. */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-accent);
 }
 
 .footer-grid {
@@ -855,7 +881,7 @@ h1, h2, h3, h4 {
   margin-bottom: 24px;
 }
 
-.footer-grid .logo-text { color: var(--color-white); }
+.footer-grid .logo-text { color: var(--color-white); font-size: 1.9rem; }
 
 .site-footer .footer-bottom {
   display: flex;
