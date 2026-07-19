@@ -140,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!ticking) {
         window.requestAnimationFrame(function () {
           var offset = Math.min(window.scrollY * 0.12, 60);
-          heroImg.style.transform = "translateY(" + offset + "px)";
+          // translate3d (nem translateY), hogy a réteg GPU-kompozitált maradjon
+          // és ne demótálódjon vissza görgetés közben - így nincs villanás.
+          heroImg.style.transform = "translate3d(0, " + offset + "px, 0)";
           ticking = false;
         });
         ticking = true;

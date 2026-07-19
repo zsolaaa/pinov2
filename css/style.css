@@ -273,6 +273,14 @@ h1, h2, h3, h4 {
   max-height: none;
   object-fit: cover;
   object-position: 50% 58%;
+  /* Saját, állandó GPU-kompozit rétegre emeljük a képet, hogy a görgetéses
+     parallax alatt ne rajzolja újra a böngésző - e nélkül a nagy hero-fotó
+     minden scroll-frame-nél villant/ugrált egyes GPU-kon. A translate3d(0,0,0)
+     már betöltéskor promótálja a réteget (nem csak az első scroll-kor), a
+     backface-visibility: hidden pedig kiszűri a sub-pixel újrarajzolást. */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   will-change: transform;
 }
 
