@@ -544,6 +544,64 @@ h1, h2, h3, h4 {
   margin-top: 14px;
 }
 
+/* Összesített értékelés. A csillagsor két rétegből áll: egy halvány
+   "track" és egy fölé csúsztatott, 94%-ra vágott terrakotta réteg
+   (4,7 / 5 = 94%). Így a 4,7 vizuálisan is 4,7 marad, nem kerekedik
+   fel öt teli csillagra. */
+.reviews-rating {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.rating-score {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.rating-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rating-stars {
+  position: relative;
+  display: block;
+  /* 5 csillag * 17px + 4 rés * 3px */
+  width: 97px;
+  height: 17px;
+}
+
+.rating-stars-track,
+.rating-stars-row {
+  display: flex;
+  gap: 3px;
+}
+
+.rating-stars-track { color: var(--color-line-strong); }
+
+.rating-stars-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  width: 94%;
+  color: var(--color-accent);
+}
+
+/* A vágás ne nyomja össze a csillagokat: a belső sor tartja a teljes szélességet. */
+.rating-stars-row { width: 97px; flex-shrink: 0; }
+
+.rating-stars svg { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
+
+.rating-count {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
 .reviews-link {
   display: inline-flex;
   align-items: center;
