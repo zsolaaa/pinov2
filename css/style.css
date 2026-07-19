@@ -522,6 +522,118 @@ h1, h2, h3, h4 {
 .intro-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-out); }
 .intro-img:hover img { transform: scale(1.05); }
 
+/* ---------- Google értékelések ---------- */
+/* Közvetlenül a hero után álló bizalmi sáv. Szándékosan .section-tight
+   ritmusban, nem teljes 140px-es szekcióként: ez egy gyors megerősítés
+   a hero és a bemutatkozás között, nem önálló fejezet. A csillagok
+   terrakottában, nem Google-kékben - a bizonyíték a vendégé, de a
+   vizuális nyelv a márkáé marad. */
+.reviews-section { background: var(--color-bg); }
+
+.reviews-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.reviews-head h2 {
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  margin-top: 14px;
+}
+
+.reviews-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+  white-space: nowrap;
+}
+
+.reviews-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .reviews-link:hover {
+    color: var(--color-accent-dark);
+    border-bottom-color: currentColor;
+  }
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 26px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.review-stars {
+  display: flex;
+  gap: 3px;
+  color: var(--color-accent);
+}
+
+.review-stars svg { width: 17px; height: 17px; fill: currentColor; }
+
+.review-card blockquote {
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+  /* A három vélemény eltérő hosszú; a cite így is egy vonalban zár. */
+  flex-grow: 1;
+}
+
+.review-card cite {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-text-soft);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 860px) {
+  /* Mobilon vízszintesen görgethető sáv: a három kártya egymás alatt
+     kitolná a képernyőről a bemutatkozást, ami pont a hero utáni
+     legértékesebb hely. Így egy képernyőn marad, és a félig látszó
+     harmadik kártya jelzi, hogy van tovább. */
+  .reviews-grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* A kártyaárnyék és a fókuszgyűrű ne vágódjon le */
+    padding: 4px 4px 16px;
+    margin: -4px -4px -16px;
+    scrollbar-width: thin;
+  }
+
+  .review-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    padding: 22px 20px;
+  }
+
+  .reviews-head { margin-bottom: 28px; }
+}
+
 /* ---------- Nagy idézet ---------- */
 /* Egyetlen, tudatosan teli-színű pillanat az oldalon - a "Committed" színstratégia
    egy alkalmazása a különben visszafogott rendszerben, hogy legyen valódi
