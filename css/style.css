@@ -718,6 +718,57 @@ h1, h2, h3, h4 {
 
 .review-stars svg { width: 14px; height: 14px; fill: currentColor; }
 
+/* Dot-navigáció csak mobilon: a görgethető kártyasáv natív görgetősávja
+   eszközönként/böngészőnként eltérően (vagy egyáltalán nem) jelenik meg,
+   és nem illik a márka nyelvéhez. A pöttyök terrakottában jelzik a
+   pozíciót, és koppintással is vált - a hüvelykujjal elérhető, 44px-es
+   érintési felület a látható 8px-es ponton belül rejtve. */
+@media (min-width: 861px) {
+  .reviews-dots { display: none; }
+}
+
+@media (max-width: 860px) {
+  .reviews-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .reviews-dot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .reviews-dot span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-line-strong);
+    transition: background var(--dur-base) var(--ease-out),
+                width var(--dur-base) var(--ease-out);
+  }
+
+  .reviews-dot.is-active span {
+    width: 22px;
+    border-radius: 999px;
+    background: var(--color-accent);
+  }
+
+  .reviews-dot:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+}
+
 @media (max-width: 860px) {
   /* Mobilon vízszintesen görgethető sáv: a három kártya egymás alatt
      kitolná a képernyőről a bemutatkozást, ami pont a hero utáni
@@ -729,11 +780,16 @@ h1, h2, h3, h4 {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    /* A kártyaárnyék és a fókuszgyűrű ne vágódjon le */
-    padding: 4px 4px 16px;
-    margin: -4px -4px -16px;
-    scrollbar-width: thin;
+    /* A kártyaárnyék és a fókuszgyűrű ne vágódjon le. A görgetősáv már
+       nincs (lásd lent), ezért az alsó térköz csak az árnyéknak kell,
+       nem is kellett a korábbi 16px. */
+    padding: 4px 4px 6px;
+    margin: -4px -4px -6px;
+    /* A natív görgetősávot a dot-navigáció váltja - lásd fentebb. */
+    scrollbar-width: none;
   }
+
+  .reviews-grid::-webkit-scrollbar { display: none; }
 
   /* Szélesebb kártya és szűkebb vízszintes margó: a bőséges asztali
      belső margó mobilon 200px alá szorítaná a szövegoszlopot, ami a
