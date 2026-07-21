@@ -1,0 +1,18 @@
+# Pinocchio Pizzéria
+
+> Olasz pizzéria Baján (Magyarország) - kemencében sült pizzák, friss tészták, eredeti toszkán receptek alapján.
+
+Pinocchio Pizzéria helyi étterem Baja belvárosában, a Tóth Kálmán téren. Nyitva minden nap 11:00-22:00 között. Cím: 6500 Baja, Tóth Kálmán tér 5. Telefon: +36 30 755 6846.
+
+## Oldalak
+
+- [Kezdőlap](https://zsolaaa.github.io/pinov2/index.html): bemutatkozás, nyitvatartás, elérhetőség, vendégértékelések és gyakori kérdések
+- [Étlap](https://zsolaaa.github.io/pinov2/etlap.html): teljes étlap - pizzák, tészták, saláták, extra feltétek, desszertek, italok, üdítők és kávék, árakkal
+- [Galéria](https://zsolaaa.github.io/pinov2/galeria.html): fotók a konyhából, az ételekről és a teraszról
+- [Rólunk](https://zsolaaa.github.io/pinov2/rolunk.html): az étterem bemutatkozása és filozófiája
+- [Kapcsolat](https://zsolaaa.github.io/pinov2/kapcsolat.html): elérhetőségek, térkép, kapcsolatfelvételi űrlap
+- [Támogatás](https://zsolaaa.github.io/pinov2/tamogatas.html): tájékoztatás a Széchenyi Terv Plusz / EU-s támogatásról, amelyből az étterem megnyílt
+
+## Gyakori kérdések
+
+A kezdőlap GYIK szekciója tartalmazza a legfontosabb gyakorlati kérdéseket: fizetési módok (SZÉP-kártya, bankkártya), asztalfoglalás, elvitel, terasz, parkolás.
