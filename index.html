@@ -22,7 +22,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- A betűtípus-CSS nem blokkoló betöltése: preload + media=print trükk. A
+       PageSpeed Insights 1730 ms renderelés-blokkolást mért mobilon, amíg ez a
+       stíluslap szinkron <link rel="stylesheet">-ként töltődött. A noscript
+       ág gondoskodik róla, hogy JS nélkül is alkalmazódjon a betűtípus. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" media="print" onload="this.media=&#39;all&#39;; this.onload=null;">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -54,10 +60,10 @@
 
   <section class="hero">
     <div class="hero-bg-wrap">
-      <img class="hero-bg-img" src="images/hero-pizza.webp" alt="Pizza szeletelése a teraszon, napsütésben, sör és frissítők mellett" data-ph="Hero fotó: teraszon, kézzel vágott pizza">
+      <img class="hero-bg-img" src="images/hero-pizza.webp" width="1200" height="1600" alt="Pizza szeletelése a teraszon, napsütésben, sör és frissítők mellett" data-ph="Hero fotó: teraszon, kézzel vágott pizza">
     </div>
     <a href="tamogatas.html" class="funding-banner" aria-label="Széchenyi Terv Plusz támogatás – részletek a Támogatás oldalon">
-      <img src="images/szechenyi-terv-plusz.webp" alt="Széchenyi Terv Plusz, Magyarország Kormánya, Európai Unió" data-ph="Széchenyi Terv Plusz sáv" style="height:52px; width:auto; display:block;">
+      <img src="images/szechenyi-terv-plusz.webp" width="1339" height="400" alt="Széchenyi Terv Plusz, Magyarország Kormánya, Európai Unió" data-ph="Széchenyi Terv Plusz sáv" style="height:52px; width:auto; display:block;">
     </a>
     <div class="container">
       <div class="hero-content">
@@ -194,7 +200,7 @@
         </p>
       </div>
       <div class="intro-img" data-reveal>
-        <img src="images/asztal-etel.webp" alt="Pizza, tészta és bor az asztalon" data-ph="Asztali fotó: pizza, tészta, bor" loading="lazy" decoding="async">
+        <img src="images/asztal-etel.webp" width="1050" height="1400" alt="Pizza, tészta és bor az asztalon" data-ph="Asztali fotó: pizza, tészta, bor" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -208,7 +214,7 @@
 
       <div class="bento-grid">
         <div class="bento-card row-2 has-photo" data-reveal>
-          <img src="images/etlap-elonezet.webp" alt="Válogatás a pizzáinkból" data-ph="Pizza válogatás" loading="lazy" decoding="async">
+          <img src="images/etlap-elonezet.webp" width="900" height="1200" alt="Válogatás a pizzáinkból" data-ph="Pizza válogatás" loading="lazy" decoding="async">
           <div class="bento-label">
             <div class="tag">Legnépszerűbb</div>
             <div class="name">Pizza válogatás</div>
@@ -216,7 +222,7 @@
         </div>
 
         <div class="bento-card span-2 has-photo" data-reveal>
-          <img src="images/rolunk-teszta.webp" alt="Kézzel nyújtott házi tészta friss bazsalikommal" data-ph="Házi tészta bazsalikommal" loading="lazy" decoding="async">
+          <img src="images/rolunk-teszta.webp" width="900" height="1200" alt="Kézzel nyújtott házi tészta friss bazsalikommal" data-ph="Házi tészta bazsalikommal" loading="lazy" decoding="async">
           <div class="bento-label">
             <div class="tag">Minden nap frissen</div>
             <div class="name">Házi tészták</div>
@@ -240,7 +246,7 @@
         </div>
 
         <div class="bento-card has-photo" data-reveal>
-          <img src="images/rolunk-pizza.webp" alt="Kemencében sült pizza dobozban" data-ph="Pizza dobozban" loading="lazy" decoding="async">
+          <img src="images/rolunk-pizza.webp" width="900" height="1200" alt="Kemencében sült pizza dobozban" data-ph="Pizza dobozban" loading="lazy" decoding="async">
           <div class="bento-label">
             <div class="tag">Elvitelre is</div>
             <div class="name">Rendelj most</div>
@@ -345,12 +351,12 @@
       </div>
 
       <div class="partners-strip" data-reveal>
-        <img src="images/logo-chillibaja.webp" alt="Chilli Baja logó" data-ph="Chilli Baja logó" loading="lazy" decoding="async">
-        <img src="images/logo-pinocchio.webp" alt="Pinocchio logó" data-ph="Pinocchio logó" loading="lazy" decoding="async">
+        <img src="images/logo-chillibaja.webp" width="480" height="480" alt="Chilli Baja logó" data-ph="Chilli Baja logó" loading="lazy" decoding="async">
+        <img src="images/logo-pinocchio.webp" width="480" height="480" alt="Pinocchio logó" data-ph="Pinocchio logó" loading="lazy" decoding="async">
       </div>
 
       <div class="payment-note">
-        <img src="images/szep_kartyak.webp" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók" loading="lazy" decoding="async">
+        <img src="images/szep_kartyak.webp" width="700" height="401" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók" loading="lazy" decoding="async">
         <p>Éttermünkben SZÉP-kártyás fizetésre is van lehetőség. Elfogadjuk az OTP, MBH és K&amp;H SZÉP-kártyákat, a vendéglátás alszámláról történő fizetéssel.</p>
       </div>
     </div>

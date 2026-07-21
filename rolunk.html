@@ -22,7 +22,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- A betűtípus-CSS nem blokkoló betöltése: preload + media=print trükk. A
+       PageSpeed Insights 1730 ms renderelés-blokkolást mért mobilon, amíg ez a
+       stíluslap szinkron <link rel="stylesheet">-ként töltődött. A noscript
+       ág gondoskodik róla, hogy JS nélkül is alkalmazódjon a betűtípus. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" media="print" onload="this.media=&#39;all&#39;; this.onload=null;">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -61,7 +67,7 @@
   <section class="section-tight" data-reveal-group>
     <div class="container about-grid">
       <div class="about-cell" data-reveal>
-        <img src="images/rolunk.webp" alt="Terasz a Pinocchio előtt, friss pizzával és Birra Moretti-vel" data-ph="Fotó: terasz, pizza és sör">
+        <img src="images/rolunk.webp" width="1354" height="1805" alt="Terasz a Pinocchio előtt, friss pizzával és Birra Moretti-vel" data-ph="Fotó: terasz, pizza és sör">
       </div>
       <div class="about-cell text-cell" data-reveal>
         <h3>A Pinocchio egy ilyen hely.</h3>
@@ -72,7 +78,7 @@
         <p>Nem kompromisszumokból, hanem meggyőződésből. Hiszünk abban, hogy egy jól elkészített étel több mint táplálék – pillanat, amelyre vissza lehet emlékezni. Ezért törekszünk arra, hogy minden egyes tányér, amelyet az asztalra teszünk, ezt az érzést hordozza magában.<br><br>Köszönjük, hogy betértél hozzánk. Reméljük, hogy nemcsak egyszer.</p>
       </div>
       <div class="about-cell" data-reveal>
-        <img src="images/rolunk-pizza.webp" alt="Kemencében sült pizza dobozban" data-ph="Fotó: kemencében sült pizza dobozban">
+        <img src="images/rolunk-pizza.webp" width="900" height="1200" alt="Kemencében sült pizza dobozban" data-ph="Fotó: kemencében sült pizza dobozban">
       </div>
     </div>
   </section>
@@ -85,12 +91,12 @@
       </div>
 
       <div class="partners-strip" data-reveal>
-        <img src="images/logo-chillibaja.webp" alt="Chilli Baja logó" data-ph="Chilli Baja logó">
-        <img src="images/logo-pinocchio.webp" alt="Pinocchio logó" data-ph="Pinocchio logó">
+        <img src="images/logo-chillibaja.webp" width="480" height="480" alt="Chilli Baja logó" data-ph="Chilli Baja logó">
+        <img src="images/logo-pinocchio.webp" width="480" height="480" alt="Pinocchio logó" data-ph="Pinocchio logó">
       </div>
 
       <div class="payment-note">
-        <img src="images/szep_kartyak.webp" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók">
+        <img src="images/szep_kartyak.webp" width="700" height="401" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók">
         <p>Éttermünkben SZÉP-kártyás fizetésre is van lehetőség. Elfogadjuk az OTP, MBH és K&amp;H SZÉP-kártyákat, a vendéglátás alszámláról történő fizetéssel.</p>
       </div>
     </div>

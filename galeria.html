@@ -22,7 +22,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- A betűtípus-CSS nem blokkoló betöltése: preload + media=print trükk. A
+       PageSpeed Insights 1730 ms renderelés-blokkolást mért mobilon, amíg ez a
+       stíluslap szinkron <link rel="stylesheet">-ként töltődött. A noscript
+       ág gondoskodik róla, hogy JS nélkül is alkalmazódjon a betűtípus. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" media="print" onload="this.media=&#39;all&#39;; this.onload=null;">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -61,21 +67,21 @@
   <section class="section-tight">
     <div class="container">
       <div class="gallery-bento" data-reveal-group>
-        <figure class="span-2" data-reveal><img src="images/galeria-1.webp" alt="Galéria fotó 1" data-ph="Galéria fotó 1"></figure>
-        <figure data-reveal><img src="images/galeria-2.webp" alt="Galéria fotó 2" data-ph="Galéria fotó 2"></figure>
-        <figure class="row-2" data-reveal><img src="images/galeria-3.webp" alt="Galéria fotó 3" data-ph="Galéria fotó 3"></figure>
-        <figure data-reveal><img src="images/galeria-4.webp" alt="Galéria fotó 4" data-ph="Galéria fotó 4"></figure>
-        <figure data-reveal><img src="images/galeria-5.webp" alt="Galéria fotó 5" data-ph="Galéria fotó 5"></figure>
-        <figure class="span-2" data-reveal><img src="images/galeria-6.webp" alt="Galéria fotó 6" data-ph="Galéria fotó 6"></figure>
-        <figure data-reveal><img src="images/galeria-7.webp" alt="Galéria fotó 7" data-ph="Galéria fotó 7"></figure>
-        <figure class="row-2" data-reveal><img src="images/galeria-8.webp" alt="Galéria fotó 8" data-ph="Galéria fotó 8"></figure>
-        <figure data-reveal><img src="images/galeria-9.webp" alt="Galéria fotó 9" data-ph="Galéria fotó 9"></figure>
-        <figure class="span-2" data-reveal><img src="images/galeria-10.webp" alt="Galéria fotó 10" data-ph="Galéria fotó 10"></figure>
-        <figure data-reveal><img src="images/galeria-11.webp" alt="Galéria fotó 11" data-ph="Galéria fotó 11"></figure>
-        <figure data-reveal><img src="images/galeria-12.webp" alt="Galéria fotó 12" data-ph="Galéria fotó 12"></figure>
-        <figure class="row-2" data-reveal><img src="images/galeria-13.webp" alt="Galéria fotó 13" data-ph="Galéria fotó 13"></figure>
-        <figure data-reveal><img src="images/galeria-14.webp" alt="Galéria fotó 14" data-ph="Galéria fotó 14"></figure>
-        <figure class="span-2" data-reveal><img src="images/galeria-15.webp" alt="Galéria fotó 15" data-ph="Galéria fotó 15"></figure>
+        <figure class="span-2" data-reveal><img src="images/galeria-1.webp" width="1200" height="1600" alt="Galéria fotó 1" data-ph="Galéria fotó 1"></figure>
+        <figure data-reveal><img src="images/galeria-2.webp" width="1200" height="1600" alt="Galéria fotó 2" data-ph="Galéria fotó 2"></figure>
+        <figure class="row-2" data-reveal><img src="images/galeria-3.webp" width="1200" height="1600" alt="Galéria fotó 3" data-ph="Galéria fotó 3"></figure>
+        <figure data-reveal><img src="images/galeria-4.webp" width="1200" height="1600" alt="Galéria fotó 4" data-ph="Galéria fotó 4"></figure>
+        <figure data-reveal><img src="images/galeria-5.webp" width="1200" height="1600" alt="Galéria fotó 5" data-ph="Galéria fotó 5"></figure>
+        <figure class="span-2" data-reveal><img src="images/galeria-6.webp" width="1200" height="1600" alt="Galéria fotó 6" data-ph="Galéria fotó 6"></figure>
+        <figure data-reveal><img src="images/galeria-7.webp" width="1200" height="1600" alt="Galéria fotó 7" data-ph="Galéria fotó 7"></figure>
+        <figure class="row-2" data-reveal><img src="images/galeria-8.webp" width="1200" height="1600" alt="Galéria fotó 8" data-ph="Galéria fotó 8"></figure>
+        <figure data-reveal><img src="images/galeria-9.webp" width="1200" height="1600" alt="Galéria fotó 9" data-ph="Galéria fotó 9"></figure>
+        <figure class="span-2" data-reveal><img src="images/galeria-10.webp" width="1200" height="1600" alt="Galéria fotó 10" data-ph="Galéria fotó 10"></figure>
+        <figure data-reveal><img src="images/galeria-11.webp" width="1200" height="1600" alt="Galéria fotó 11" data-ph="Galéria fotó 11"></figure>
+        <figure data-reveal><img src="images/galeria-12.webp" width="1200" height="1600" alt="Galéria fotó 12" data-ph="Galéria fotó 12"></figure>
+        <figure class="row-2" data-reveal><img src="images/galeria-13.webp" width="1200" height="1600" alt="Galéria fotó 13" data-ph="Galéria fotó 13"></figure>
+        <figure data-reveal><img src="images/galeria-14.webp" width="1600" height="1200" alt="Galéria fotó 14" data-ph="Galéria fotó 14"></figure>
+        <figure class="span-2" data-reveal><img src="images/galeria-15.webp" width="1200" height="1600" alt="Galéria fotó 15" data-ph="Galéria fotó 15"></figure>
       </div>
     </div>
   </section>
@@ -88,12 +94,12 @@
       </div>
 
       <div class="partners-strip" data-reveal>
-        <img src="images/logo-chillibaja.webp" alt="Chilli Baja logó" data-ph="Chilli Baja logó">
-        <img src="images/logo-pinocchio.webp" alt="Pinocchio logó" data-ph="Pinocchio logó">
+        <img src="images/logo-chillibaja.webp" width="480" height="480" alt="Chilli Baja logó" data-ph="Chilli Baja logó">
+        <img src="images/logo-pinocchio.webp" width="480" height="480" alt="Pinocchio logó" data-ph="Pinocchio logó">
       </div>
 
       <div class="payment-note">
-        <img src="images/szep_kartyak.webp" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók">
+        <img src="images/szep_kartyak.webp" width="700" height="401" alt="OTP, K&amp;H és MBH SZÉP kártya logók" data-ph="SZÉP kártya logók">
         <p>Éttermünkben SZÉP-kártyás fizetésre is van lehetőség. Elfogadjuk az OTP, MBH és K&amp;H SZÉP-kártyákat, a vendéglátás alszámláról történő fizetéssel.</p>
       </div>
     </div>
