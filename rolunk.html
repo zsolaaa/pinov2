@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rólunk | Pinocchio Pizzéria</title>
+  <meta name="description" content="Ismerd meg a Pinocchio Pizzériát: eredeti toszkán receptek, hosszú kelesztésű tészta és valódi olasz ízek Baján.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -96,6 +98,41 @@
       </div>
     </div>
   </footer>
+
+  <!-- LocalBusiness/Restaurant séma. A cím, telefon és nyitvatartás szó szerint
+       azonos mind a 6 oldalon, ezért minden oldalra felkerül - nem csak a
+       főoldalra -, hogy önmagában is helyesen leírja magát a keresőknek. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Pinocchio Pizzéria",
+    "image": "https://zsolaaa.github.io/pinov2/images/hero-pizza.webp",
+    "url": "https://zsolaaa.github.io/pinov2/rolunk.html",
+    "telephone": "+36307556846",
+    "priceRange": "250-3990 Ft",
+    "servesCuisine": ["Italian", "Pizza"],
+    "menu": "https://zsolaaa.github.io/pinov2/etlap.html",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tóth Kálmán tér 5.",
+      "addressLocality": "Baja",
+      "postalCode": "6500",
+      "addressCountry": "HU"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:00",
+      "closes": "22:00"
+    },
+    "sameAs": [
+      "https://www.instagram.com/pinocchio_baja/",
+      "https://www.facebook.com/bajapinocchio",
+      "https://www.tiktok.com/@pinocchiobaja"
+    ]
+  }
+  </script>
 
   <script src="js/script.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
