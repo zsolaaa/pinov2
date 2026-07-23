@@ -312,19 +312,33 @@ h1, h2, h3, h4 {
   max-width: 780px;
 }
 
-.hero-content > * {
+/* A h1 kimarad az egységes blokk-animációból: a cím szavanként, saját
+   lépcsőzéssel jelenik meg (lásd .hero-word lentebb), nem egy blokként. */
+.hero-content > *:not(h1) {
   animation: hero-rise 700ms var(--ease-out) both;
 }
 .hero-content .hero-status { animation-delay: 0ms; }
 .hero-content .eyebrow { animation-delay: 80ms; }
-.hero-content h1 { animation-delay: 160ms; }
-.hero-content p { animation-delay: 260ms; }
-.hero-content .hero-actions { animation-delay: 360ms; }
+.hero-content p { animation-delay: 380ms; }
+.hero-content .hero-actions { animation-delay: 480ms; }
 
 @keyframes hero-rise {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Szavankénti hero-cím beúszás: minden szó külön inline-block span-ként
+   kap egy rövid késleltetést, hogy a cím lépcsőzve, szavanként jelenjen
+   meg betöltéskor - ne egyben ugorjon be, mint egy tömb. A szavak közti
+   szóköz szöveges csomópont marad (nem span), így a sortörés a normál
+   szóköz-szabályok szerint természetesen viselkedik. */
+.hero-word {
+  display: inline-block;
+  animation: hero-rise 700ms var(--ease-out) both;
+}
+.hero-word:nth-child(1) { animation-delay: 160ms; }
+.hero-word:nth-child(2) { animation-delay: 220ms; }
+.hero-word:nth-child(3) { animation-delay: 280ms; }
 
 .hero-status {
   display: inline-flex;
