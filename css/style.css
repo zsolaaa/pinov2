@@ -297,6 +297,17 @@ h1, h2, h3, h4 {
   .hero-bg-img { will-change: auto; }
 }
 
+/* Hero háttérvideó: csak asztali, egérrel navigáló, mozgást toleráló
+   látogatóknak (lásd script.js) - a statikus kép marad alul, a videó
+   fölé úszik be, mihelyt lejátszásra kész. Ha bármi okból nem indul el
+   (lassú hálózat, autoplay-tiltás), a kép változatlanul látszik alatta -
+   nincs üres/törött állapot. */
+.hero-bg-video {
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out);
+}
+.hero-bg-video.is-visible { opacity: 1; }
+
 .hero::after {
   content: "";
   position: absolute;

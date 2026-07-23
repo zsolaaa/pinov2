@@ -378,4 +378,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, { passive: true });
   }
+
+  // Hero háttérvideó: csak asztali, egérrel navigáló, mozgást toleráló
+  // látogatóknak - ugyanaz a szűrés, mint a parallaxnál fent. Mobilon/
+  // érintőn/reduced-motion esetén a <video> el sem készül, tehát nulla
+  // extra adatforgalom - a statikus kép marad, ami gyorsabb, és pontosan
+  // ezt várja a mobil-first célközönség egy gyors pillantásnál.
+  if (heroImg && !prefersReduced && !isTouchOrSmall) {
+    var heroVideo = document.createElement("video");
+    heroVideo.className = "hero-bg-img hero-bg-video";
+    heroVideo.muted = true;
+    heroVideo.loop = true;
+    heroVideo.playsInline = true;
+    heroVideo.setAttribute("aria-hidden", "true");
+    heroVideo.preload = "auto";
+    heroVideo.src = "videos/hero-pizza.mp4";
+
+    // Csak akkor jelenik meg a kép fölött, ha ténylegesen lejátszásra
+    // kész - így nincs fekete/üres villanás a kép és a videó között.
+    heroVideo.addEventListener("canplaythrough", function () {
+      heroVideo.classList.add("is-visible");
+    }, { once: true });
+
+    heroImg.insertAdjacentElement("afterend", heroVideo);
+    // Ha az autoplay-t a böngésző elutasítja (pl. szigorúbb tiltás),
+    // a videó egyszerűen láthatatlan marad, a kép alatta változatlan.
+    heroVideo.play().catch(function () {});
+  }
 });
